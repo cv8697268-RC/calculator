@@ -1,42 +1,66 @@
-def add(a,b):
-    return a+b
-def mul (a,b):
-    return a-b
-def sub(a,b):
-    return a*b
-def div(a,b):
-    return a/b
-def mod(a,b):
-    return a%b
+import math
 
 while True:
-    a = int(input("Enter the first value ::"))
-    b = int(input("Enter the second value ::"))
-    
-    print("1. add")
-    print("2. sub")
-    print("3. mul")
-    print("4. div")
-    print("5. mod")
-    print("6. exit")
-       
-    choice = int(input("Enter the ur choice::"))
+    print("\n===== Scientific Calculator =====")
+    print("1. Addition")
+    print("2. Subtraction")
+    print("3. Multiplication")
+    print("4. Division")
+    print("5. Power")
+    print("6. Square Root")
+    print("7. Sin")
+    print("8. Cos")
+    print("9. Tan")
+    print("10. Log")
+    print("0. Exit")
 
-    if choice == 1:
-        print("add a and b",add(a,b))
-        
-    elif choice ==2:
-        print("mul a and b",mul(a,b))
-        
-    elif choice ==3:
-        print("sub a and b",sub(a,b))
-    elif choice ==4:
-        print("div a and b",div(a,b))
-    elif choice == 5:
-        print("mod a and b",mod(a,b))
-    elif choice == 6:
-        print("tnx welcome again")
+    choice = input("Enter your choice: ")
+
+    if choice == "0":
+        print("Calculator Closed")
         break
+
+    elif choice in ["1", "2", "3", "4", "5"]:
+        a = float(input("Enter first number: "))
+        b = float(input("Enter second number: "))
+
+        if choice == "1":
+            print("Result =", a + b)
+
+        elif choice == "2":
+            print("Result =", a - b)
+
+        elif choice == "3":
+            print("Result =", a * b)
+
+        elif choice == "4":
+            if b == 0:
+                print("Cannot divide by zero")
+            else:
+                print("Result =", a / b)
+
+        elif choice == "5":
+            print("Result =", a ** b)
+
+    elif choice == "6":
+        num = float(input("Enter number: "))
+        print("Result =", math.sqrt(num))
+
+    elif choice == "7":
+        angle = float(input("Enter angle in degrees: "))
+        print("Result =", math.sin(math.radians(angle)))
+
+    elif choice == "8":
+        angle = float(input("Enter angle in degrees: "))
+        print("Result =", math.cos(math.radians(angle)))
+
+    elif choice == "9":
+        angle = float(input("Enter angle in degrees: "))
+        print("Result =", math.tan(math.radians(angle)))
+
+    elif choice == "10":
+        num = float(input("Enter number: "))
+        print("Result =", math.log10(num))
+
     else:
-        print("Invalid choice")
-    
+        print("Invalid Choice")
