@@ -1,0 +1,137 @@
+import tkinter as tk
+import math
+
+
+def click(value):
+    current = display.get()
+    display.delete(0, tk.END)
+    display.insert(0, current + str(value))
+
+
+def clear():
+    display.delete(0, tk.END)
+
+
+def calculate():
+    try:
+        expression = display.get()
+        result = eval(expression)
+        display.delete(0, tk.END)
+        display.insert(0, result)
+
+    except:
+        display.delete(0, tk.END)
+        display.insert(0, "Error")
+
+
+def scientific(operation):
+
+    try:
+        number = float(display.get())
+
+        if operation == "sqrt":
+            result = math.sqrt(number)
+
+        elif operation == "sin":
+            result = math.sin(math.radians(number))
+
+        elif operation == "cos":
+            result = math.cos(math.radians(number))
+
+        elif operation == "tan":
+            result = math.tan(math.radians(number))
+
+        elif operation == "log":
+            result = math.log10(number)
+
+        display.delete(0, tk.END)
+        display.insert(0, result)
+
+    except:
+        display.delete(0, tk.END)
+        display.insert(0, "Error")
+
+
+# Window
+root = tk.Tk()
+root.title("Scientific Calculator")
+root.geometry("400x550")
+root.resizable(False, False)
+
+
+# Display
+display = tk.Entry(
+    root,
+    font=("Arial", 22),
+    justify="right"
+)
+
+display.pack(
+    fill="x",
+    padx=10,
+    pady=20
+)
+
+
+# Buttons
+buttons = [
+    ["7","8","9","/"],
+    ["4","5","6","*"],
+    ["1","2","3","-"],
+    ["0",".","+","="]
+]
+
+
+for row in buttons:
+    frame = tk.Frame(root)
+    frame.pack()
+
+    for button in row:
+
+        if button == "=":
+            btn = tk.Button(
+                frame,
+                text=button,
+                width=8,
+                height=2,
+                command=calculate
+            )
+
+        else:
+            btn = tk.Button(
+                frame,
+                text=button,
+                width=8,
+                height=2,
+                command=lambda x=button: click(x)
+            )
+
+        btn.pack(side="left", padx=5, pady=5)
+
+
+# Extra buttons
+
+extra = [
+    ("Clear", clear),
+    ("√", lambda: scientific("sqrt")),
+    ("Sin", lambda: scientific("sin")),
+    ("Cos", lambda: scientific("cos")),
+    ("Tan", lambda: scientific("tan")),
+    ("Log", lambda: scientific("log"))
+]
+
+
+for text, command in extra:
+
+    btn = tk.Button(
+        root,
+        text=text,
+        width=10,
+        height=2,
+        command=command
+    )
+
+    btn.pack(side="left", padx=5, pady=10)
+
+
+root.mainloop()
